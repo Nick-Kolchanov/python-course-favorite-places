@@ -105,10 +105,13 @@ class PlacesService:
             longitude=place.longitude,
             description=place.description,
         )
-        if original_place.latitude != place.latitude or original_place.longitude != place.longitude:            
+        if (
+            original_place.latitude != place.latitude
+            or original_place.longitude != place.longitude
+        ):
             # при изменении координат – обогащение данных путем получения дополнительной информации от API
             if location := await LocationClient().get_location(
-                    latitude=place.latitude, longitude=place.longitude
+                latitude=place.latitude, longitude=place.longitude
             ):
                 updated_place.country = location.alpha2code
                 updated_place.city = location.city
@@ -124,7 +127,9 @@ class PlacesService:
                 city=updated_place.city,
                 alpha2code=updated_place.country,
             )
-            EventProducer().publish(queue_name=settings.rabbitmq.queue.places_import, body=place_data.json())
+            EventProducer().publish(
+                queue_name=settings.rabbitmq.queue.places_import, body=place_data.json()
+            )
         except ValidationError:
             logger.warning(
                 "Validation error on CountryCity model",

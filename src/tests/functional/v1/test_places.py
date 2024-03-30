@@ -85,6 +85,7 @@ class TestPlacesCreateMethod:
         assert created_data[0].city == mock_response["city"]
         assert created_data[0].locality == mock_response["locality"]
 
+
 @pytest.mark.usefixtures("session")
 class TestPlacesGetMethod:
     """

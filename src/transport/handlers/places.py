@@ -5,7 +5,7 @@ from geocoder.ipinfo import IpinfoQuery
 
 from exceptions import ApiHTTPException, ObjectNotFoundException
 from models.places import Place
-from schemas.places import PlaceResponse, PlaceUpdate, DescriptionRequest
+from schemas.places import DescriptionRequest, PlaceResponse, PlaceUpdate
 from schemas.routes import MetadataTag
 from services.places_service import PlacesService
 

@@ -31,6 +31,7 @@ class PlacesListResponse(ListResponse):
 
     data: list[Place]
 
+
 class DescriptionRequest(BaseModel):
     """Схема для описания"""
 

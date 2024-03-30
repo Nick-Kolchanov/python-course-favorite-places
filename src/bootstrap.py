@@ -3,6 +3,7 @@ from fastapi import FastAPI
 from exceptions import setup_exception_handlers
 from routes import metadata_tags, setup_routes
 from settings import settings
+from fastapi_pagination import add_pagination
 
 
 def build_app() -> FastAPI:
@@ -19,5 +20,6 @@ def build_app() -> FastAPI:
 
     setup_routes(app)
     setup_exception_handlers(app)
+    add_pagination(app)
 
     return app

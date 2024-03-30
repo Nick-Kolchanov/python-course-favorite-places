@@ -30,3 +30,8 @@ class PlacesListResponse(ListResponse):
     """
 
     data: list[Place]
+
+class DescriptionRequest(BaseModel):
+    """Схема для описания"""
+
+    description: str = Field(title="Описание", min_length=3, max_length=255)

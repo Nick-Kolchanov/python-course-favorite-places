@@ -2,23 +2,23 @@
 
 # обновление сборки Docker-контейнера
 build:
-	docker compose build
+	MSYS_NO_PATHCONV=1 docker compose build
 
 # генерация документации
 docs-html:
-	docker compose run --no-deps --workdir /docs favorite-places-app /bin/bash -c "make html"
+	MSYS_NO_PATHCONV=1 docker compose run --no-deps --workdir /docs favorite-places-app /bin/bash -c "make html"
 
 # запуск форматирования кода
 format:
-	docker compose run --no-deps --workdir / favorite-places-app /bin/bash -c "black src docs/source/*.py; isort --profile black src docs/source/*.py"
+	MSYS_NO_PATHCONV=1 docker compose run --no-deps --workdir / favorite-places-app /bin/bash -c "black src docs/source/*.py; isort --profile black src docs/source/*.py"
 
 # запуск статического анализа кода (выявление ошибок типов и форматирования кода)
 lint:
-	docker compose run --no-deps --workdir / favorite-places-app /bin/bash -c "pylint src; flake8 src; mypy src; black --check src"
+	MSYS_NO_PATHCONV=1 docker compose run --no-deps --workdir / favorite-places-app /bin/bash -c "pylint src; flake8 src; mypy src; black --check src"
 
 # запуск автоматических тестов
 test:
-	docker compose run favorite-places-app pytest --cov=/src --cov-report html:htmlcov --cov-report term --cov-config=/src/tests/.coveragerc -vv
+	MSYS_NO_PATHCONV=1 docker compose run favorite-places-app pytest --cov=/src --cov-report html:htmlcov --cov-report term --cov-config=/src/tests/.coveragerc -vv
 
 # запуск всех функций поддержки качества кода
 all: format lint test
